@@ -40,5 +40,15 @@ export class HomeComponent {
     this.filteredLocationList = this.housingLocationList;
   }
 
-  filterResults(test: string) {}
+  filterResults(text: string) {
+    if (!text) {
+      this.filteredLocationList = this.housingLocationList;
+      return;
+    }
+
+    this.filteredLocationList = this.housingLocationList.filter(
+      (housingLocation) =>
+        housingLocation?.city.toLowerCase().includes(text.toLowerCase())
+    );
+  }
 }
