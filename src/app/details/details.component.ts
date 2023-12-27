@@ -33,6 +33,20 @@ import { HousingLocation } from '../housing-location';
           </li>
         </ul>
       </section>
+      <section class="listing-apply">
+        <h2 class="section-heading">Apply now to live here</h2>
+        <form [formGroup]="applyForm" (submit)="submitApplication()">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" formControlName="firstName" />
+
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" formControlName="lastName" />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" />
+          <button type="submit" class="primary">Apply now</button>
+        </form>
+      </section>
     </article>
   `,
   styleUrl: './details.component.css',
@@ -44,8 +58,8 @@ export class DetailsComponent {
   applyForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    email: new FormControl('')
-  })
+    email: new FormControl(''),
+  });
 
   constructor() {
     const housingLocationId = Number(this.route.snapshot.params['id']);
@@ -55,9 +69,9 @@ export class DetailsComponent {
 
   submitApplication() {
     this.housingService.submitApplication(
-      this.applyForm.value.firstName?? '',
+      this.applyForm.value.firstName ?? '',
       this.applyForm.value.lastName ?? '',
       this.applyForm.value.email ?? ''
-    )
+    );
   }
 }
